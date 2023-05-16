@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function App() {
   const [guests, setGuests] = useState([]);
@@ -9,16 +9,20 @@ export default function App() {
 
   // add user
   async function addUser() {
-    const addPeep = await fetch('http://localhost:4000/guests/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    cd;
+    const addPeep = await fetch(
+      'https://ba2008ce-b411-4aa4-8a86-5cae3365bf20.id.repl.co/guests/',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+        }),
       },
-      body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-      }),
-    });
+    );
     const createdGuest = await addPeep.json();
     if (addPeep.ok) {
       setGuests([...guests, createdGuest]);
@@ -37,11 +41,12 @@ export default function App() {
 
   useEffect(() => {
     async function getUser() {
-      const response = await fetch('http://localhost:4000/guests/');
+      const response = await fetch(
+        'https://ba2008ce-b411-4aa4-8a86-5cae3365bf20.id.repl.co/guests/',
+      );
       const allGuest = await response.json();
       setGuests(allGuest);
       setIsLoading(false);
-      console.log('test');
     }
     getUser().catch((error) => {
       console.log(error);
@@ -52,9 +57,12 @@ export default function App() {
 
   async function removeGuest(id) {
     try {
-      const response = await fetch(`http://localhost:4000/guests/${id}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `https://ba2008ce-b411-4aa4-8a86-5cae3365bf20.id.repl.co/guests/${id}`,
+        {
+          method: 'DELETE',
+        },
+      );
       if (response.ok) {
         setGuests((oldGuestList) =>
           oldGuestList.filter((guest) => guest.id !== id),
@@ -71,13 +79,16 @@ export default function App() {
 
   async function updateGuestData(id, updatedAttendStatus) {
     try {
-      const response = await fetch(`http://localhost:4000/guests/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://ba2008ce-b411-4aa4-8a86-5cae3365bf20.id.repl.co/guests/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ attending: updatedAttendStatus }),
         },
-        body: JSON.stringify({ attending: updatedAttendStatus }),
-      });
+      );
 
       const guestInfo = await response.json();
       console.log(guestInfo);
@@ -133,7 +144,6 @@ export default function App() {
     <div data-test-id="guest">
       {isLoading ? 'Loading...' : ''}
       <main>
-        {/* {JSON.stringify(isLoading)} */}
         <div>Add guest:</div>
         <form onSubmit={handleSubmit}>
           <input
