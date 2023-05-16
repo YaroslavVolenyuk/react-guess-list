@@ -1,5 +1,6 @@
-import './App.css';
+// import './App.css';
 import React, { useEffect, useState } from 'react';
+import styles from './App.module.scss';
 
 export default function App() {
   const [guests, setGuests] = useState([]);
@@ -9,7 +10,6 @@ export default function App() {
 
   // add user
   async function addUser() {
-    cd;
     const addPeep = await fetch(
       'https://ba2008ce-b411-4aa4-8a86-5cae3365bf20.id.repl.co/guests/',
       {
@@ -145,6 +145,7 @@ export default function App() {
       {isLoading ? 'Loading...' : ''}
       <main>
         <div>Add guest:</div>
+        <br />
         <form onSubmit={handleSubmit}>
           <input
             disabled={isLoading}
@@ -160,6 +161,7 @@ export default function App() {
           <br />
 
           <input
+            className={styles.input}
             disabled={isLoading}
             data-test-id="guest"
             id="lastName"
@@ -172,17 +174,16 @@ export default function App() {
           />
 
           <br />
-          <br />
-          <button>Save</button>
-          <button onClick={() => removeAll(129)}>delete All</button>
+          <button>Save the guest</button>
         </form>
+        <br />
         <div>list of guests:</div>
         <br />
         <div>
           {guests.map((element) => {
             return (
               <li key={`guest-${element.id}`}>
-                {element.firstName} {element.lastName}, id: {element.id},
+                {element.firstName} {element.lastName};
                 <label>
                   attending:
                   <input

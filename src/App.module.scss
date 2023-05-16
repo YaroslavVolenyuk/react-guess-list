@@ -1,0 +1,40 @@
+input {
+  border-radius: 5px;
+  border: transparent;
+}
+
+main {
+  background-color: rgb(204, 204, 204);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  border-radius: 10px;
+  margin: 50px;
+  padding: 25px;
+}
+
+form {
+  background-color: rgb(234, 234, 234);
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border-radius: 20px;
+}
+
+button {
+  border-radius: 5px;
+  border: transparent;
+}
+
+body {
+  background-color: rgb(35, 35, 35);
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  justify-content: center;
+  text-align: justify;
+}
